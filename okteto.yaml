@@ -1,0 +1,20 @@
+deploy:
+  compose: docker-compose.yaml
+
+dev:
+  hello-world:
+    command: bash
+    sync: 
+    - .:/app
+    forward:
+    - 9229:9229
+
+test:
+  e2e:
+    image: node:22
+    commands:
+      - npm install
+      - npm run test:e2e
+    caches:
+      - dist
+      - node_modules
